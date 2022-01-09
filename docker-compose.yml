@@ -38,8 +38,6 @@ services:
       - VIRTUAL_HOST=vaultwarden.home.arpa
       - VIRTUAL_PORT=80
       - VIRTUAL_PROTO=http
-    ports:
-      - "3012:3012"
     restart: always
     volumes:
       - ./data/vaultwarden/:/data/
