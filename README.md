@@ -64,13 +64,13 @@ apt install git git-crypt
 
 ### Download & setup script
 
-Prerequisites: Access to git-crypt symmetric secret key file
+Prerequisites: Valid GPG key to unlock git-crypt
 
 ```bash
 cd # to /root
 git clone https://github.com/WaveHack/intranet
 cd intranet
-git-crypt unlock /path/to/git-crypt.key
+git-crypt unlock
 ```
 
 Update .env file
