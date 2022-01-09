@@ -2,7 +2,7 @@
 
 ## Setup
 
-### Setup Raspberry Pi OS
+### Set up Raspberry Pi OS
 
 Download & install Raspberry Pi OS Lite
 
@@ -10,7 +10,7 @@ Login with: pi/raspberry
 
 Set up Wi-Fi & locale settings with  `sudo raspi-config`
 
-### Setup user accounts
+### Set up user accounts
 
 Set root password with `sudo passwd`
 
@@ -18,7 +18,7 @@ Login as root
 
 Remove default pi user with `deluser --remove-home pi`
 
-### SSH as root
+### Enable SSH as root
 
 /etc/ssh/sshd_config: PermitRootLogin Yes
 
@@ -49,7 +49,7 @@ Disconnect monitor + keyboard from Raspberry Pi
 ```
 apt update
 apt upgrade
-apt install git git-crypt
+apt install git git-crypt rclone
 ```
 
 ### Install Docker & Docker Compose
@@ -62,7 +62,7 @@ apt install git git-crypt
 
 `pip3 install docker-compose`
 
-### Download & setup script
+### Download & set up repository
 
 Prerequisites: Valid GPG key to unlock git-crypt
 
@@ -81,6 +81,7 @@ git clone https://github.com/WaveHack/intranet
 cd intranet
 git-crypt unlock ../git-crypt.key
 cp .env.example .env
+ln -sf ~/.config/rclone/rclone.conf ./rclone.conf
 ```
 
 Update the .env file.
@@ -90,3 +91,5 @@ Update the .env file.
 `docker-compose up --build -d`
 
 ## Usage
+
+(todo)
