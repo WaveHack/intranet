@@ -38,6 +38,7 @@ services:
       - VIRTUAL_HOST=vaultwarden.home.arpa
       - VIRTUAL_PORT=80
       - VIRTUAL_PROTO=http
+      - WEBSOCKET_ENABLED=true
     restart: always
     volumes:
       - ./data/vaultwarden/:/data/
