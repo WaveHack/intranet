@@ -7,8 +7,10 @@ services:
     container_name: nginx-proxy
     ports:
       - "80:80"
+      - "443:443"
     restart: always
     volumes:
+      - ./certs:/etc/nginx/certs
       - /var/run/docker.sock:/tmp/docker.sock:ro
 
   portainer:
@@ -16,7 +18,8 @@ services:
     container_name: portainer
     environment:
       - VIRTUAL_HOST=portainer.home.arpa
-      - VIRTUAL_PORT=9000
+      - VIRTUAL_PORT=9443
+      - VIRTUAL_PROTO=https
     restart: always
     volumes:
       - portainer_data:/data
