@@ -49,7 +49,7 @@ Disconnect monitor + keyboard from Raspberry Pi
 ```
 apt update
 apt upgrade
-apt install git
+apt install git git-crypt
 ```
 
 ### Install Docker & Docker Compose
@@ -64,11 +64,13 @@ apt install git
 
 ### Download & setup script
 
+Prerequisites: Access to git-crypt symmetric secret key file
+
 ```bash
 cd # to /root
 git clone https://github.com/WaveHack/intranet
 cd intranet
-cp .env.example .env
+git-crypt unlock /path/to/git-crypt.key
 ```
 
 Update .env file
