@@ -80,9 +80,10 @@ cd # to /root
 git clone https://github.com/WaveHack/intranet
 cd intranet
 git-crypt unlock ../git-crypt.key
+cp .env.example .env
 ```
 
-Update .env file
+Update the .env file.
 
 ### Watch the magic happen
 

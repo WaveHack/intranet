@@ -26,5 +26,22 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
+  # todo: configure SMTP-server: https://github.com/dani-garcia/vaultwarden/blob/a30a1c970365f78d45c123a04f8288ced7cd3390/.env.template#L327-L338
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    environment:
+      - ADMIN_TOKEN=${VAULTWARDEN_ADMIN_TOKEN}
+      - DOMAIN=https://vaultwarden.home.arpa
+      - SIGNUPS_ALLOWED=false
+      - VIRTUAL_HOST=vaultwarden.home.arpa
+      - VIRTUAL_PORT=8443
+      - VIRTUAL_PROTO=https
+    ports:
+      - "3012:3012"
+    restart: always
+    volumes:
+      - ./data/vaultwarden/:/data/
+
 volumes:
   portainer_data:
