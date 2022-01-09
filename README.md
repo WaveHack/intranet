@@ -66,11 +66,20 @@ apt install git git-crypt
 
 Prerequisites: Valid GPG key to unlock git-crypt
 
+Workstation:
+
+```
+git-crypt export-key ./git-crypt.key
+scp git-crypt.key wh-pi:~/
+```
+
+Raspberry Pi:
+
 ```bash
 cd # to /root
 git clone https://github.com/WaveHack/intranet
 cd intranet
-git-crypt unlock
+git-crypt unlock ../git-crypt.key
 ```
 
 Update .env file
