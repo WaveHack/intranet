@@ -1,0 +1,9 @@
+location /notifications/hub {
+    proxy_pass http://vaultwarden.home.arpa:3012/;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+}
+
+location /notifications/hub/negotiate {
+    proxy_pass http://vaultwarden.home.arpa/;
+}
