@@ -1,3 +1,7 @@
 location /notifications/hub {
-    proxy_pass http://vaultwarden:3012/;
+    proxy_pass http://vaultwarden:3012;
+}
+
+location /notifications/hub/negotiate {
+    proxy_pass http://vaultwarden;
 }
