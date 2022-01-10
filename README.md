@@ -81,7 +81,7 @@ git clone https://github.com/WaveHack/intranet
 cd intranet
 git-crypt unlock ../git-crypt.key
 cp .env.example .env
-ln -sf ~/.config/rclone/rclone.conf ./rclone.conf
+ln -sf ./rclone.conf ~/.config/rclone/rclone.conf
 ```
 
 Update the .env file.
