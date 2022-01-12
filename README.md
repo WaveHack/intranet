@@ -49,7 +49,7 @@ Disconnect monitor + keyboard from Raspberry Pi
 ```
 apt update
 apt upgrade
-apt install git git-crypt rclone
+apt install git git-crypt
 ```
 
 ### Install Docker & Docker Compose
@@ -81,7 +81,6 @@ git clone https://github.com/WaveHack/intranet
 cd intranet
 git-crypt unlock ../git-crypt.key
 cp .env.example .env
-ln -sf ~/intranet/rclone.conf ~/.config/rclone/rclone.conf
 ```
 
 Update the .env file.
