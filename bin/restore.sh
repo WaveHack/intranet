@@ -11,7 +11,7 @@ docker run \
   --rm \
   -it \
   --mount type=volume,source=vaultwarden_data,target=/bitwarden/data/ \
-  --mount type=bind,source="$(dirname $0)/../",target=/bitwarden/restore/ \
+  --mount type=bind,source="$(realpath $(dirname $0)/../)",target=/bitwarden/restore/ \
   ttionya/vaultwarden-backup:latest \
   restore \
   --zip-file $BACKUP_FILE
