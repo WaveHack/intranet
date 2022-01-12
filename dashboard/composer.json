@@ -3,6 +3,7 @@
     "license": "AGPL-3.0",
     "require": {
         "php": "^8.1",
+        "beluga-php/docker-php": "3.x",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
