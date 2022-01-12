@@ -10,8 +10,6 @@ services:
       - "443:443"
     restart: always
     volumes:
-      - ./.docker/nginx-proxy/vhost.d:/etc/nginx/vhost.d:ro
-      - ./certs:/etc/nginx/certs:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
 
   portainer:

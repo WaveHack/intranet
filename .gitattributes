@@ -1,2 +1,2 @@
-certs/*.key filter=git-crypt diff=git-crypt
-rclone.conf filter=git-crypt diff=git-crypt
+nginx-proxy/certs/*.key filter=git-crypt diff=git-crypt
+vaultwarden_backup/rclone.conf filter=git-crypt diff=git-crypt
