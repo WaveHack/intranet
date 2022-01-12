@@ -8,8 +8,11 @@ npm-debug.log
 yarn-error.log
 
 # Generated Files
+/public/css
 /public/hot
+/public/js
 /public/storage
+/public/mix-manifest.json
 /vendor
 .phpunit.result.cache
 
