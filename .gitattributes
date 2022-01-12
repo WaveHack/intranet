@@ -1,2 +1,2 @@
-nginx-proxy/certs/*.key filter=git-crypt diff=git-crypt
-vaultwarden_backup/rclone.conf filter=git-crypt diff=git-crypt
+.docker/nginx-proxy/certs/*.key filter=git-crypt diff=git-crypt
+rclone.conf filter=git-crypt diff=git-crypt
