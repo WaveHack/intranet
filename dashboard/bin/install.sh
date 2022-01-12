@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
+if [ "$APP_ENV" = "local" ]; then
+    composer install
+else
+    composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
+fi
 
 if [ ! -f ".env" ]; then
     cp .env.example .env
@@ -9,6 +13,10 @@ fi
 
 yarn install
 
-yarn run production
-
-php artisan optimize
+if [ "$APP_ENV" = "local" ]; then
+    yarn run watch &
+    php artisan optimize:clear
+else
+    yarn run production
+    php artisan optimize
+fi

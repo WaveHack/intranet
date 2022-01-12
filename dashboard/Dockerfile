@@ -1,5 +1,6 @@
 FROM ubuntu:21.04
 
+ENV APP_ENV=local
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
 
@@ -42,6 +43,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 # Cleanup
 #RUN apt purge -y software-properties-common \
 #    && apt -y autoremove \
-#    && apt clean
+#    && apt clean \
+#    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENTRYPOINT ["bash", "bin/entrypoint.sh"]

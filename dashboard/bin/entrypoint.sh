@@ -2,4 +2,6 @@
 
 bash bin/install.sh
 
-php artisan serve --host=0.0.0.0 --port=80
+php artisan serve --host=0.0.0.0 --port=80 &
+
+bash -l
