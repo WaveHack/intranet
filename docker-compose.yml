@@ -41,7 +41,22 @@ services:
       - WEBSOCKET_ENABLED=true
     restart: always
     volumes:
-      - ./data/vaultwarden/:/data/
+      - vaultwarden_data:/data/
+
+  vaultwarden_backup:
+    image: ttionya/vaultwarden-backup:latest
+    container_name: vaultwarden_backup
+    environment:
+      - BACKUP_KEEP_DAYS=90
+      - RCLONE_CONFIG_PASS=${VAULTWARDEN_BACKUP_RCLONE_CONFIG_PASS}
+      - RCLONE_REMOTE_DIR=${VAULTWARDEN_BACKUP_RCLONE_REMOTE_DIR}
+      - RCLONE_REMOTE_NAME=${VAULTWARDEN_BACKUP_RCLONE_REMOTE_NAME}
+      - ZIP_PASSWORD=${VAULTWARDEN_BACKUP_ZIP_PASSWORD}
+    restart: always
+    volumes:
+      - ./vaultwarden_backup/rclone.conf:/config/rclone/rclone.conf:ro
+      - vaultwarden_data:/bitwarden/data
 
 volumes:
   portainer_data:
+  vaultwarden_data:
