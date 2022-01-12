@@ -11,6 +11,8 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx-proxy/vhost.d:/etc/nginx/vhost.d:ro
+      - ./nginx-proxy/certs:/etc/nginx/certs:ro
 
   portainer:
     image: portainer/portainer-ce:latest
@@ -21,9 +23,9 @@ services:
       - VIRTUAL_PROTO=https
     restart: always
     volumes:
-      - portainer_data:/data
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - portainer_data:/data
 
   # todo: configure SMTP-server: https://github.com/dani-garcia/vaultwarden/blob/a30a1c970365f78d45c123a04f8288ced7cd3390/.env.template#L327-L338
   vaultwarden:
