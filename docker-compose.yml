@@ -11,8 +11,8 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./nginx-proxy/vhost.d:/etc/nginx/vhost.d:ro
-      - ./nginx-proxy/certs:/etc/nginx/certs:ro
+      - ./.docker/nginx-proxy/vhost.d/:/etc/nginx/vhost.d/:ro
+      - ./.docker/nginx-proxy/certs/:/etc/nginx/certs/:ro
 
   portainer:
     image: portainer/portainer-ce:latest
@@ -25,7 +25,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - portainer_data:/data
+      - portainer_data:/data/
 
   # todo: configure SMTP-server: https://github.com/dani-garcia/vaultwarden/blob/a30a1c970365f78d45c123a04f8288ced7cd3390/.env.template#L327-L338
   vaultwarden:
@@ -42,21 +42,6 @@ services:
     restart: always
     volumes:
       - vaultwarden_data:/data/
-
-  vaultwarden_backup:
-    image: ttionya/vaultwarden-backup:latest
-    container_name: vaultwarden_backup
-    environment:
-      - BACKUP_KEEP_DAYS=${VAULTWARDEN_BACKUP_BACKUP_KEEP_DAYS}
-      - CRON=${VAULTWARDEN_BACKUP_CRON}
-      - RCLONE_CONFIG_PASS=${VAULTWARDEN_BACKUP_RCLONE_CONFIG_PASS}
-      - RCLONE_REMOTE_DIR=${VAULTWARDEN_BACKUP_RCLONE_REMOTE_DIR}
-      - RCLONE_REMOTE_NAME=${VAULTWARDEN_BACKUP_RCLONE_REMOTE_NAME}
-      - ZIP_PASSWORD=${VAULTWARDEN_BACKUP_ZIP_PASSWORD}
-    restart: always
-    volumes:
-      - ./vaultwarden_backup/rclone.conf:/config/rclone/rclone.conf:ro
-      - vaultwarden_data:/bitwarden/data
 
 volumes:
   portainer_data:
