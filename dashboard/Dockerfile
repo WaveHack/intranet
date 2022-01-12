@@ -38,4 +38,4 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && apt update \
     && apt install -y yarn
 
-ENTRYPOINT ["/usr/bin/bash"]
+ENTRYPOINT ["bash", "bin/entrypoint.sh"]
