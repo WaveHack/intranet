@@ -12,6 +12,9 @@ services:
       - VIRTUAL_PORT=80
       - VIRTUAL_PROTO=http
     restart: always
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./:/var/www/html
 
   nginx-proxy:
     image: jwilder/nginx-proxy
