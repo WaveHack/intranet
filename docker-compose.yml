@@ -7,6 +7,7 @@ services:
       context: ./.docker/backup
     container_name: backup
     environment:
+      - CONTAINERS_TO_STOP=portainer,vaultwarden
       - RCLONE_CONFIG_PASS=${BACKUP_RCLONE_CONFIG_PASS}
       - RCLONE_REMOTE_NAME=${BACKUP_RCLONE_REMOTE_NAME}
       - ZIP_PASSWORD=${BACKUP_ZIP_PASSWORD}

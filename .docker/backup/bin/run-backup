@@ -2,9 +2,16 @@
 
 echo "[$(date +"%Y-%m-%d %H:%M:%S")] Backup started"
 
+[ -z "$CONTAINERS_TO_STOP" ] && (echo 'Env var CONTAINERS_TO_STOP not set'; exit 1)
 [ -z "$RCLONE_CONFIG_PASS" ] && (echo 'Env var RCLONE_CONFIG_PASS not set'; exit 1)
 [ -z "$RCLONE_REMOTE_NAME" ] && (echo 'Env var RCLONE_REMOTE_NAME not set'; exit 1)
 [ -z "$ZIP_PASSWORD" ] && (echo 'Env var ZIP_PASSWORD not set'; exit 1)
+
+echo "Stopping containers"
+
+for container in ${CONTAINERS_TO_STOP//,/ }; do
+  docker stop "$container"
+done
 
 for directory in /backup/*; do
   name=$(basename "$directory")
@@ -18,3 +25,11 @@ for directory in /backup/*; do
   rclone copy "$file" "$RCLONE_REMOTE_NAME:/Backups/Intranet/$name"
   rm -f "$file"
 done
+
+echo "Starting containers"
+
+for container in ${CONTAINERS_TO_STOP//,/ }; do
+  docker start "$container"
+done
+
+echo "Done"
