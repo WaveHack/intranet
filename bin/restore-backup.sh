@@ -13,8 +13,8 @@ container=$1
 volume=$2
 zipfile=$3
 
-docker container inspect "$container" >/dev/null 2>&1 || (echo "Docker container $container not found"; exit 1)
-docker volume inspect "$volume" >/dev/null 2>&1 || (echo "Docker volume $volume not found"; exit 1)
+docker container inspect "$container" >/dev/null 2>&1 || echo "Docker container $container not found" && exit 1
+docker volume inspect "$volume" >/dev/null 2>&1 || echo "Docker volume $volume not found" && exit 1
 
 if [ ! -f "$zipfile" ]; then
   echo "Cannot find $zipfile"
@@ -33,7 +33,7 @@ docker run \
   --volume=$tmpdir/:/backup/zipfile/:ro \
   --volume=$volume:/backup/volume/ \
   busybox:latest \
-  rm -rf /backup/volume/* && cp -R /backup/zipfile/* /backup/volume/
+  rm -rf /backup/volume/\* && cp -R /backup/zipfile/\* /backup/volume/
 
 rm -rf "$tmpdir"
 
