@@ -13,6 +13,7 @@ WORKDIR /var/www/html
 # System packages
 RUN apt update \
     && apt install -y \
+        cron \
         curl \
         git \
         software-properties-common \
@@ -39,6 +40,9 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
     && apt update \
     && apt install -y yarn
+
+# Crontab entry for Laravel's Scheduler
+RUN echo '*  *    * * *   root    php /var/www/html/artisan schedule:run >/proc/1/fd/1 2>/proc/1/fd/2' >> /etc/crontab
 
 # Cleanup
 #RUN apt purge -y software-properties-common \
