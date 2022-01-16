@@ -32,4 +32,23 @@
             </div>
         @endforeach
     </div>
+
+    {{--
+    additional stuff:
+
+    current time
+    current weather in $location
+    vaultwarden backup:
+    - (create daily backup cronjob with rclone)
+    - last backup status
+    - restore backup (latest? selector?)
+    rspi cpu/memory/temperature/hdd status
+    btc/eth course graphs
+    - portfolio holdings price?
+    personal calendars (google)
+    household shopping list
+    household todo list
+    --}}
+
+
 </x-app-layout>
