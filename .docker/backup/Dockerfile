@@ -1,13 +1,11 @@
 FROM alpine:3.14
 
-RUN apk --update add rclone zip
+RUN apk add --no-cache docker rclone zip
 
-COPY bin /usr/local/bin
-RUN chmod +x /usr/local/bin/*
-
+COPY bin/ /usr/local/bin/
+COPY crontab /etc/crontabs/root
 COPY rclone.conf /root/.config/rclone/rclone.conf
 
-COPY crontab /etc/crontabs/root
+RUN chmod +x /usr/local/bin/*
 
-#CMD ["sh", "-l"]
-CMD ["crond", "-f", "-d", "8"]
+CMD ["crond", "-f"]
