@@ -12,6 +12,7 @@ services:
       - RCLONE_REMOTE_NAME=${BACKUP_RCLONE_REMOTE_NAME}
       - ZIP_PASSWORD=${BACKUP_ZIP_PASSWORD}
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - vaultwarden_data:/backup/vaultwarden
 
 #  dashboard:
