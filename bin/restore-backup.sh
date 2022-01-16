@@ -30,8 +30,8 @@ unzip -d "$tmpdir" "$zipfile"
 
 docker run \
   --rm \
-  "--volume=$tmpdir/:/backup/zipfile/:ro" \
-  "--volume=$volume:/backup/volume/" \
+  --volume=$tmpdir/:/backup/zipfile/:ro \
+  --volume=$volume:/backup/volume/ \
   busybox:latest \
   rm -rf /backup/volume/* && cp -R /backup/zipfile/* /backup/volume/
 
