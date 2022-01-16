@@ -17,7 +17,7 @@ for directory in /backup/*; do
   name=$(basename "$directory")
   file="/tmp/$(date +"%Y-%m-%d-%H-%M-%S")-$name.zip"
 
-  echo "- $name"
+  echo "Backing up: $name"
 
   # shellcheck disable=SC2164
   cd "$directory"
