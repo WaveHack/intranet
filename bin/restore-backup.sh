@@ -30,8 +30,7 @@ docker run \
   "--volume=$tmpdir:/backup/zipfile:ro" \
   "--volume=$volume:/backup/volume" \
   busybox:latest \
-  -- \
-  rm -rf /backup/volume/ && cp -R /backup/zipfile/ /backup/volume/
+  rm -rf /backup/volume/{,.[!.],..?}* && cp -R /backup/zipfile/ /backup/volume/
 
 rm -rf "$tmpdir"
 
