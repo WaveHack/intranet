@@ -4,14 +4,16 @@ openssl x509 \
   -x509toreq \
   -in ../certs/ca.crt \
   -signkey ../certs/ca.key \
-  -out ../certs/ca.csr
+  -out ../certs/ca.csr \
+  -copy_extensions copyall
 
 openssl x509 \
   -req \
   -days 365 \
   -in ../certs/ca.csr \
   -signkey ../certs/ca.key \
-  -out ../certs/ca.crt
+  -out ../certs/ca.crt \
+  -copy_extensions copyall
 
 rm ../certs/ca.csr
 
