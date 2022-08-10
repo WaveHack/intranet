@@ -42,7 +42,7 @@ services:
       - ./.docker/nginx-proxy/certs/:/etc/nginx/certs/:ro
 
   portainer:
-    image: portainer/portainer-ce:latest
+    image: portainer/portainer-ce:2.14.2-alpine
     container_name: portainer
     environment:
       - VIRTUAL_HOST=portainer.home.arpa
