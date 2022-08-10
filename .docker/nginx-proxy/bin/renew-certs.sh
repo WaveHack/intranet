@@ -19,7 +19,8 @@ openssl x509 \
   -x509toreq \
   -in ../certs/home.arpa.crt \
   -signkey ../certs/home.arpa.key \
-  -out ../certs/home.arpa.csr
+  -out ../certs/home.arpa.csr \
+  -copy_extensions copyall
 
 openssl x509 \
   -req \
@@ -27,6 +28,7 @@ openssl x509 \
   -in ../certs/home.arpa.csr \
   -CA ../certs/ca.crt \
   -CAkey ../certs/ca.key \
-  -out ../certs/home.arpa.crt
+  -out ../certs/home.arpa.crt \
+  -copy_extensions copyall
 
 rm ../certs/home.arpa.csr
