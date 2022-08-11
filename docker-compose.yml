@@ -43,6 +43,20 @@ services:
       - ./.docker/nginx-proxy/vhost.d/:/etc/nginx/vhost.d/:ro
       - ./.docker/nginx-proxy/certs/:/etc/nginx/certs/:ro
 
+  pihole:
+    image: pihole/pihole:2022.07.1
+    container_name: pihole
+    environment:
+      - TZ=Europe/Amsterdam
+      - VIRTUAL_HOST=pihole.home.arpa
+      - WEBPASSWORD=${PIHOLE_WEB_PASSWORD}
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    restart: unless-stopped
+    volumes:
+      -
+
   portainer:
     image: portainer/portainer-ce:2.14.2-alpine
     container_name: portainer
