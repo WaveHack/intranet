@@ -11,6 +11,7 @@ services:
       - RCLONE_CONFIG_PASS=${BACKUP_RCLONE_CONFIG_PASS}
       - RCLONE_REMOTE_NAME=${BACKUP_RCLONE_REMOTE_NAME}
       - ZIP_PASSWORD=${BACKUP_ZIP_PASSWORD}
+    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - vaultwarden_data:/backup/vaultwarden
@@ -62,7 +63,7 @@ services:
       - VIRTUAL_HOST=portainer.home.arpa
       - VIRTUAL_PORT=9443
       - VIRTUAL_PROTO=https
-    restart: always
+    restart: unless-stopped
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -78,7 +79,7 @@ services:
       - SIGNUPS_ALLOWED=false
       - VIRTUAL_HOST=vaultwarden.home.arpa
       - WEBSOCKET_ENABLED=true
-    restart: always
+    restart: unless-stopped
     volumes:
       - vaultwarden_data:/data/
 
