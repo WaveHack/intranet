@@ -55,6 +55,9 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
     restart: unless-stopped
+    volumes:
+      - pihole_dnsmasq_data:/etc/dnsmasq.d
+      - pihole_etc_data:/etc/pihole
 
   portainer:
     image: portainer/portainer-ce:2.14.2-alpine
@@ -84,5 +87,7 @@ services:
       - vaultwarden_data:/data/
 
 volumes:
+  pihole_etc_data:
+  pihole_dnsmasq_data:
   portainer_data:
   vaultwarden_data:
