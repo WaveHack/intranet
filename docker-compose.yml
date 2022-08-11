@@ -54,8 +54,6 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
     restart: unless-stopped
-    volumes:
-      -
 
   portainer:
     image: portainer/portainer-ce:2.14.2-alpine
