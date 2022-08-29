@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
-BASEPATH="$(cd -- "$(dirname "$0")/../" ; pwd -P)"
+# this script assumes this project repo is cloned in /root/intranet, cba to change rn
 
-if [ ! -f "$BASEPATH/.env" ]; then
-  echo "Error: .env file not found"
+if [ ! -f "/root/intranet/.env" ]; then
+  echo "Error: .env file not found in /root/intranet/"
   exit 1
 fi
 
@@ -17,7 +17,7 @@ if [ $# -ne 3 ]; then
 fi
 
 set -a
-. "$BASEPATH/.env"
+. "/root/intranet/.env"
 set +a
 
 CONTAINER=$1
@@ -54,7 +54,7 @@ docker run \
     sh -c "cd /backup/input; zip --quiet --recurse-paths --encrypt --password \"$BACKUP_ZIP_PASSWORD\" - . >/backup/output"
 
 echo "Backing up \"$ZIP_FILENAME\" to $RCLONE_REMOTE_NAME"
-rclone --config "$BASEPATH/rclone/rclone.conf" \
+rclone --config "/root/intranet/rclone/rclone.conf" \
   --ask-password=false \
   copy "$TMP_FILE" \
   "$RCLONE_REMOTE_NAME:/Backups/Intranet/$CONTAINER"
