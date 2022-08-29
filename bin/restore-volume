@@ -38,6 +38,6 @@ docker run \
   --volume=$zipfile:/backup/input:ro \
   --volume=$volume:/backup/output:rw \
   wavehack/zip:latest \
-    sh -c "unzip /backup/input -d /backup/output"
+    sh -c "rm -rf /backup/output/*; rm -rf /backup/output/.*; unzip /backup/input -d /backup/output"
 
 echo "Backup restored. You need to restart the container manually"
