@@ -32,10 +32,12 @@ fi
 
 docker build -t wavehack/zip $(dirname $0)/../.docker/zip --network=host
 
+zipfile_absolute=$(readlink -f $zipfile)
+
 docker run \
   -it \
   --rm \
-  --volume=$zipfile:/backup/input:ro \
+  --volume=$zipfile_absolute:/backup/input:ro \
   --volume=$volume:/backup/output:rw \
   wavehack/zip:latest \
     sh -c "rm -rf /backup/output/*; rm -rf /backup/output/.*; unzip /backup/input -d /backup/output"
