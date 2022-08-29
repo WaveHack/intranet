@@ -51,7 +51,7 @@ docker run \
   --volume=$VOLUME:/backup/input:ro \
   --volume=$TMP_FILE:/backup/output:rw \
   joshkeegan/zip:latest \
-    sh -c "cd /backup/input; zip --recurse-paths --encrypt --password \"$BACKUP_ZIP_PASSWORD\" - . >/backup/output"
+    sh -c "cd /backup/input; zip --quiet --recurse-paths --encrypt --password \"$BACKUP_ZIP_PASSWORD\" - . >/backup/output"
 
 echo "Backing up \"$ZIP_FILENAME\" to $RCLONE_REMOTE_NAME"
 rclone --config "$BASEPATH/rclone/rclone.conf" \
