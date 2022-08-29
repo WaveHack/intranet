@@ -19,33 +19,14 @@ services:
   fireflyiii:
     image: fireflyiii/core:latest
     container_name: fireflyiii
-    depends_on:
-      - fireflyiii_database
     environment:
       - APP_KEY=${FIREFLYIII_APP_KEY}
-      - DB_HOST=fireflyiii_database
-      - DB_PORT=3306
-      - DB_CONNECTION=mysql
-      - DB_DATABASE=fireflyiii
-      - DB_USERNAME=${FIREFLYIII_DB_USER}
-      - DB_PASSWORD=${FIREFLYIII_DB_PASSWORD}
+      - DB_CONNECTION=sqlite
       - VIRTUAL_HOST=firefly-iii.home.arpa
       - VIRTUAL_PORT=8080
     restart: unless-stopped
     volumes:
       - fireflyiii_upload_data:/var/www/html/storage/upload
-
-  fireflyiii_database:
-    image: mysql/mysql-server:8.0
-    container_name: fireflyiii_database
-    environment:
-      - MYSQL_RANDOM_ROOT_PASSWORD=yes
-      - MYSQL_USER=${FIREFLYIII_DB_USER}
-      - MYSQL_PASSWORD=${FIREFLYIII_DB_PASSWORD}
-      - MYSQL_DATABASE=fireflyiii
-    restart: unless-stopped
-    volumes:
-      -   fireflyiii_database_data:/var/lib/mysql
 
   nginx-proxy:
     image: jwilder/nginx-proxy:alpine
