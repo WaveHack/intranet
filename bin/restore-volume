@@ -39,7 +39,7 @@ docker run \
   --rm \
   --volume=$tmpdir/:/backup/zipfile/:ro \
   --volume=$volume:/backup/volume/ \
-  busybox:latest \
+  alpine:3.16 \
   rm -rf /backup/volume/\* && cp -R /backup/zipfile/\* /backup/volume/
 
 rm -rf "$tmpdir"
