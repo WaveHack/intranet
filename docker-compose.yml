@@ -26,6 +26,7 @@ services:
       - VIRTUAL_PORT=8080
     restart: unless-stopped
     volumes:
+      - fireflyiii_database_data:/var/www/html/storage/database
       - fireflyiii_upload_data:/var/www/html/storage/upload
 
   nginx-proxy:
