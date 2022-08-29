@@ -21,7 +21,9 @@ services:
     container_name: fireflyiii
     environment:
       - APP_KEY=${FIREFLYIII_APP_KEY}
+      - APP_URL=https://firefly-iii.home.arpa
       - DB_CONNECTION=sqlite
+      - TRUSTED_PROXIES=**
       - VIRTUAL_HOST=firefly-iii.home.arpa
       - VIRTUAL_PORT=8080
     restart: unless-stopped
