@@ -46,7 +46,7 @@ TMP_FILE="/tmp/$ZIP_FILENAME"
 
 touch "$TMP_FILE" # Create with current user ownership
 
-docker build -t wavehack:zip /root/intranet/.docker/zip
+docker build -t wavehack:zip /root/intranet/.docker/zip --network=host
 
 docker run \
   --rm \
