@@ -46,13 +46,13 @@ TMP_FILE="/tmp/$ZIP_FILENAME"
 
 touch "$TMP_FILE" # Create with current user ownership
 
-docker build -t wavehack:zip /root/intranet/.docker/zip --network=host
+docker build -t wavehack/zip /root/intranet/.docker/zip --network=host
 
 docker run \
   --rm \
   --volume=$VOLUME:/backup/input:ro \
   --volume=$TMP_FILE:/backup/output:rw \
-  wavehack/zip \
+  wavehack/zip:latest \
     sh -c "cd /backup/input; zip --quiet --recurse-paths --encrypt --password \"$BACKUP_ZIP_PASSWORD\" - . >/backup/output"
 
 echo "Backing up \"$ZIP_FILENAME\" to $RCLONE_REMOTE_NAME"
