@@ -1,0 +1,67 @@
+#!/usr/bin/env sh
+
+BASEPATH="$(cd -- "$(dirname "$0")/../" ; pwd -P)"
+
+if [ ! -f "$BASEPATH/.env" ]; then
+  echo "Error: .env file not found"
+  exit 1
+fi
+
+if [ $# -ne 3 ]; then
+  echo "Usage: $0 <container> <volume> <name>"
+  echo
+  echo "  container  Container name to stop before creating a backup (eg: vaultwarden)"
+  echo "  volume     Volume to backup (eg: intranet_vaultwarden_data)"
+  echo "  name       Name of the zip file to create (eg: vaultwarden)"
+  exit 1
+fi
+
+set -a
+. "$BASEPATH/.env"
+set +a
+
+CONTAINER=$1
+VOLUME=$2
+NAME=$3
+
+$(docker container inspect "$CONTAINER" >/dev/null 2>&1)
+if [ $? -ne 0 ]; then
+  echo "Docker container \"$CONTAINER\" not found"
+  exit 1
+fi
+
+$(docker volume inspect "$VOLUME" >/dev/null 2>&1)
+if [ $? -ne 0 ]; then
+  echo "Docker volume \"$VOLUME\" not found"
+  exit 1
+fi
+
+echo "Stopping container \"$CONTAINER\""
+docker stop "$CONTAINER"
+
+echo "Mounting and zipping volume \"$VOLUME\""
+ZIP_FILENAME="$(date +"%Y%m%d-%H%M%S")-$NAME.zip"
+
+TMP_FILE="/tmp/$ZIP_FILENAME"
+
+touch "$TMP_FILE" # Create with current user ownership
+
+docker run \
+  --rm \
+  --volume=$VOLUME:/backup/input:ro \
+  --volume=$TMP_FILE:/backup/output:rw \
+  joshkeegan/zip:latest \
+    sh -c "cd /backup/input; zip --recurse-paths --encrypt --password \"$BACKUP_ZIP_PASSWORD\" - . >/backup/output"
+
+echo "Backing up \"$ZIP_FILENAME\" to $RCLONE_REMOTE_NAME"
+rclone --config "$BASEPATH/rclone/rclone.conf" \
+  --ask-password=false \
+  copy "$TMP_FILE" \
+  "$RCLONE_REMOTE_NAME:/Backups/Intranet/$CONTAINER"
+
+rm "$TMP_FILE"
+
+echo "Starting container \"$CONTAINER\""
+docker start "$CONTAINER"
+
+echo "Done"
