@@ -1,9 +1,7 @@
 #!/usr/bin/env sh
 
-# this script assumes this project repo is cloned in /root/intranet, cba to change rn
-
-if [ ! -f "/root/intranet/.env" ]; then
-  echo "Error: .env file not found in /root/intranet/"
+if [ ! -f " $(dirname $0)/../.env" ]; then
+  echo "Error: .env file not found"
   exit 1
 fi
 
@@ -17,7 +15,7 @@ if [ $# -ne 3 ]; then
 fi
 
 set -a
-. "/root/intranet/.env"
+. " $(dirname $0)/../.env"
 set +a
 
 CONTAINER=$1
@@ -46,7 +44,7 @@ TMP_FILE="/tmp/$ZIP_FILENAME"
 
 touch "$TMP_FILE" # Create with current user ownership
 
-docker build -t wavehack/zip /root/intranet/.docker/zip --network=host
+docker build -t wavehack/zip $(dirname $0)/../.docker/zip --network=host
 
 docker run \
   --rm \
@@ -56,7 +54,7 @@ docker run \
     sh -c "cd /backup/input; zip --quiet --recurse-paths --encrypt --password \"$BACKUP_ZIP_PASSWORD\" - . >/backup/output"
 
 echo "Backing up \"$ZIP_FILENAME\" to $RCLONE_REMOTE_NAME"
-rclone --config "/root/intranet/rclone/rclone.conf" \
+rclone --config " $(dirname $0)/../rclone/rclone.conf" \
   --ask-password=false \
   copy "$TMP_FILE" \
   "$RCLONE_REMOTE_NAME:/Backups/Intranet/$CONTAINER"
