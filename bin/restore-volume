@@ -13,7 +13,8 @@ container=$1
 volume=$2
 zipfile=$3
 
-if [ ! "$(docker volume inspect $volume >/dev/null 2>&1)" ]; then
+$(docker volume inspect $volume >/dev/null 2>&1)
+if [ $? -ne 0 ]; then
   echo "Docker volume $volume not found"
   exit 1
 fi
@@ -23,7 +24,8 @@ if [ ! -f "$zipfile" ]; then
   exit 1
 fi
 
-if [ "$(docker container inspect $container >/dev/null 2>&1)" ]; then
+$(docker container inspect $container >/dev/null 2>&1)
+if [ $? -eq 0 ]; then
   echo "Stopping container $container"
   docker stop "$container"
 fi
