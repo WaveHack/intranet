@@ -1,3 +1,3 @@
 FROM alpine:3.16
 
-RUN apk add --no-cache zip
+RUN apk add --no-cache zip unzip

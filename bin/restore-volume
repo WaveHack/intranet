@@ -30,17 +30,14 @@ if [ $? -eq 0 ]; then
   docker stop "$container"
 fi
 
-tmpdir=$(mktemp -d)
-
-unzip -d "$tmpdir" "$zipfile"
+docker build -t wavehack/zip /root/intranet/.docker/zip --network=host
 
 docker run \
+  -it \
   --rm \
-  --volume=$tmpdir/:/backup/zipfile/:ro \
-  --volume=$volume:/backup/volume/ \
-  alpine:3.16 \
-  rm -rf /backup/volume/\* && cp -R /backup/zipfile/\* /backup/volume/
-
-rm -rf "$tmpdir"
+  --volume=$zipfile:/backup/input:ro \
+  --volume=$volume:/backup/output:rw \
+  wavehack/zip:latest \
+    sh -c "unzip /backup/input -d /backup/output"
 
 echo "Backup restored. You need to restart the container manually"
