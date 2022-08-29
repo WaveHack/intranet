@@ -44,5 +44,4 @@ docker run \
 
 rm -rf "$tmpdir"
 
-echo "Starting container $container"
-docker start "$container"
+echo "Backup restored. You need to restart the container manually"
