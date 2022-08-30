@@ -15,7 +15,7 @@ if [ $# -ne 3 ]; then
 fi
 
 set -a
-. " $(dirname $0)/../.env"
+. "$(dirname $0)/../.env"
 set +a
 
 CONTAINER=$1
