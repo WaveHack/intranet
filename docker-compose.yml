@@ -23,7 +23,8 @@ services:
     depends_on:
       - fireflyiii
     environment:
-      - FIREFLY_III_URL=https://firefly-iii.home.arpa
+      - FIREFLY_III_URL=${FIREFLYIII_IMPORTER_FIREFLY_III_URL}
+      - VANITY_URL=https://firefly-iii.home.arpa
       - FIREFLY_III_ACCESS_TOKEN=${FIREFLYIII_IMPORTER_FIREFLY_III_ACCESS_TOKEN}
       - NORDIGEN_ID=${FIREFLYIII_IMPORTER_NORDIGEN_ID}
       - NORDIGEN_KEY=${FIREFLYIII_IMPORTER_NORDIGEN_KEY}
