@@ -32,7 +32,6 @@ services:
       - VANITY_URL=https://firefly-iii.home.arpa
       - VIRTUAL_HOST=fidi.home.arpa
       - VIRTUAL_PORT=8080
-    network_mode: host
     restart: unless-stopped
 
   nginx-proxy:
