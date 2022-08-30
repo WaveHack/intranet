@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-if [ ! -f " $(dirname $0)/../.env" ]; then
+if [ ! -f "$(dirname $0)/../.env" ]; then
   echo "Error: .env file not found"
   exit 1
 fi
@@ -54,7 +54,7 @@ docker run \
     sh -c "cd /backup/input; zip --quiet --recurse-paths --encrypt --password \"$BACKUP_ZIP_PASSWORD\" - . >/backup/output"
 
 echo "Backing up \"$ZIP_FILENAME\" to $RCLONE_REMOTE_NAME"
-rclone --config " $(dirname $0)/../rclone/rclone.conf" \
+rclone --config "$(dirname $0)/../rclone/rclone.conf" \
   --ask-password=false \
   copy "$TMP_FILE" \
   "$RCLONE_REMOTE_NAME:/Backups/Intranet/$CONTAINER"
