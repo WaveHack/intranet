@@ -53,11 +53,13 @@ docker run \
   wavehack/zip:latest \
     sh -c "cd /backup/input; zip --quiet --recurse-paths --encrypt --password \"$BACKUP_ZIP_PASSWORD\" - . >/backup/output"
 
-echo "Backing up \"$ZIP_FILENAME\" to $RCLONE_REMOTE_NAME"
+export RCLONE_REMOTE_PASS=$BACKUP_RCLONE_CONFIG_PASS
+
+echo "Backing up \"$ZIP_FILENAME\" to $BACKUP_RCLONE_REMOTE_NAME"
 rclone --config "$(dirname $0)/../rclone/rclone.conf" \
   --ask-password=false \
   copy "$TMP_FILE" \
-  "$RCLONE_REMOTE_NAME:/Backups/Intranet/$CONTAINER"
+  "$BACKUP_RCLONE_REMOTE_NAME:/Backups/Intranet/$CONTAINER"
 
 rm "$TMP_FILE"
 
