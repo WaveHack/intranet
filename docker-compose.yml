@@ -44,6 +44,7 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./.docker/nginx-proxy/conf.d/buffers.conf:/etc/nginx/conf.d/buffers.conf:ro
       - ./.docker/nginx-proxy/vhost.d/:/etc/nginx/vhost.d/:ro
       - ./.docker/nginx-proxy/certs/:/etc/nginx/certs/:ro
 
