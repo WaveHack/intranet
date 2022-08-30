@@ -10,6 +10,7 @@ services:
       - APP_URL=https://firefly-iii.home.arpa
       - DB_CONNECTION=sqlite
       - TRUSTED_PROXIES=**
+      - TZ=${TZ}
       - VIRTUAL_HOST=firefly-iii.home.arpa
       - VIRTUAL_PORT=8080
     restart: unless-stopped
@@ -29,6 +30,7 @@ services:
       - FIREFLY_III_ACCESS_TOKEN=${FIREFLYIII_IMPORTER_FIREFLY_III_ACCESS_TOKEN}
       - FIREFLY_III_URL=${FIREFLYIII_IMPORTER_FIREFLY_III_URL}
       - TRUSTED_PROXIES=**
+      - TZ=${TZ}
       - VANITY_URL=https://firefly-iii.home.arpa
       - VIRTUAL_HOST=fidi.home.arpa
       - VIRTUAL_PORT=8080
@@ -39,6 +41,7 @@ services:
     container_name: nginx-proxy
     environment:
       - NETWORK_ACCESS=internal
+      - TZ=${TZ}
     ports:
       - "80:80"
       - "443:443"
@@ -52,7 +55,7 @@ services:
     image: pihole/pihole:2022.07.1
     container_name: pihole
     environment:
-      - TZ=Europe/Amsterdam
+      - TZ=${TZ}
       - VIRTUAL_HOST=pihole.home.arpa
       - WEBPASSWORD=${PIHOLE_WEB_PASSWORD}
     ports:
@@ -67,6 +70,7 @@ services:
     image: portainer/portainer-ce:2.14.2-alpine
     container_name: portainer
     environment:
+      - TZ=${TZ}
       - VIRTUAL_HOST=portainer.home.arpa
       - VIRTUAL_PORT=9443
       - VIRTUAL_PROTO=https
@@ -84,6 +88,7 @@ services:
       - ADMIN_TOKEN=${VAULTWARDEN_ADMIN_TOKEN}
       - DOMAIN=https://vaultwarden.home.arpa
       - SIGNUPS_ALLOWED=false
+      - TZ=${TZ}
       - VIRTUAL_HOST=vaultwarden.home.arpa
       - WEBSOCKET_ENABLED=true
     restart: unless-stopped
