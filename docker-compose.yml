@@ -23,9 +23,6 @@ services:
     container_name: fireflyiii-importer
     depends_on:
       - fireflyiii
-    dns:
-      - 208.67.222.222
-      - 208.67.220.220
     environment:
       - FIREFLY_III_ACCESS_TOKEN=${FIREFLYIII_IMPORTER_FIREFLY_III_ACCESS_TOKEN}
       - FIREFLY_III_URL=${FIREFLYIII_IMPORTER_FIREFLY_III_URL}
