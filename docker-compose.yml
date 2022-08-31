@@ -52,7 +52,7 @@ services:
       - ./.docker/nginx-proxy/certs/:/etc/nginx/certs/:ro
 
   pihole:
-    image: pihole/pihole:2022.07.1
+    image: pihole/pihole:latest
     container_name: pihole
     environment:
       - TZ=${TZ}
@@ -67,7 +67,7 @@ services:
       - pihole_etc_data:/etc/pihole
 
   portainer:
-    image: portainer/portainer-ce:2.14.2-alpine
+    image: portainer/portainer-ce:alpine
     container_name: portainer
     environment:
       - TZ=${TZ}
@@ -82,7 +82,7 @@ services:
 
   # todo: configure SMTP-server: https://github.com/dani-garcia/vaultwarden/blob/a30a1c970365f78d45c123a04f8288ced7cd3390/.env.template#L327-L338
   vaultwarden:
-    image: vaultwarden/server:1.25.2-alpine
+    image: vaultwarden/server:alpine
     container_name: vaultwarden
     environment:
       - ADMIN_TOKEN=${VAULTWARDEN_ADMIN_TOKEN}
