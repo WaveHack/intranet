@@ -59,8 +59,8 @@ services:
       - VIRTUAL_HOST=pihole.home.arpa
       - WEBPASSWORD=${PIHOLE_WEB_PASSWORD}
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
+      - "${PIHOLE_HOST_IP}:53:53/tcp"
+      - "${PIHOLE_HOST_IP}:53:53/udp"
     restart: unless-stopped
     volumes:
       - pihole_dnsmasq_data:/etc/dnsmasq.d
